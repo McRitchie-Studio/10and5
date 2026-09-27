@@ -1,0 +1,54 @@
+<% content_for :title, "Score a visit · #{@restaurant.name}" %>
+
+<nav class="crumbs" aria-label="Breadcrumb"><%= link_to "Restaurants", root_path %> / <%= link_to @restaurant.name, restaurant_path(@restaurant) %></nav>
+
+<header class="page-head">
+  <div>
+    <p class="eyebrow">Evaluator scorecard</p>
+    <h1>Score a visit to <%= @restaurant.name %></h1>
+    <p class="lead">Record the visit, then mark each standard. Submitting shows the Action Plan this scorecard would give the restaurant, compared with its real history. This demo saves nothing.</p>
+  </div>
+</header>
+
+<%= form_with url: restaurant_evaluation_preview_path(@restaurant), method: :get, class: "scorecard", data: { scorecard: true } do |f| %>
+  <fieldset class="panel">
+    <legend class="panel__title">The visit</legend>
+    <div class="field-grid">
+      <label class="field"><span>Arrived</span><%= f.text_field "details[arrived]", value: @visit.arrived, placeholder: "6:45 PM" %></label>
+      <label class="field"><span>Departed</span><%= f.text_field "details[departed]", value: @visit.departed, placeholder: "8:20 PM" %></label>
+      <label class="field"><span>Party size</span><%= f.number_field "details[party_size]", value: @visit.party_size, min: 1, max: 20 %></label>
+      <label class="field"><span>Table</span><%= f.text_field "details[table]", value: @visit.table %></label>
+      <label class="field"><span>Check #</span><%= f.text_field "details[check_number]", value: @visit.check_number %></label>
+      <label class="field"><span>Check total</span><%= f.number_field "details[check_amount]", value: @visit.check_amount, min: 0, step: 0.01 %></label>
+      <label class="field"><span>All items billed</span><%= f.select "details[all_items_billed]", [ [ "–", "" ], [ "Yes", "yes" ], [ "No", "no" ] ], selected: { true => "yes", false => "no" }[@visit.all_items_billed] %></label>
+    </div>
+  </fieldset>
+
+  <% Sample.departments.each do |department| %>
+    <fieldset class="panel dept" data-department="<%= department.key %>">
+      <legend class="panel__title"><%= department.name %></legend>
+      <label class="field field--wide"><span>Staff observations</span><%= f.text_area "observations[#{department.key}]", value: @visit.observation(department), rows: 2, maxlength: Visit::NOTE_LIMIT, placeholder: "Who served you, what stood out" %></label>
+      <ul class="result-list">
+        <% department.standards.each do |standard| %>
+          <% result = @visit.result_for(standard) %>
+          <li class="result result--form" data-standard="<%= standard.id %>">
+            <span class="result__text" id="std-<%= standard.id %>"><%= standard.text %></span>
+            <span class="marks" role="radiogroup" aria-labelledby="std-<%= standard.id %>">
+              <% Result::MARKS.each do |mark| %>
+                <label class="mark mark--<%= mark %>">
+                  <%= radio_button_tag "marks[#{standard.id}]", mark, result.mark == mark, id: "mark-#{standard.id}-#{mark}" %>
+                  <span><%= ApplicationHelper::MARK_LABELS.fetch(mark) %></span>
+                </label>
+              <% end %>
+            </span>
+            <%= text_field_tag "notes[#{standard.id}]", result.note, class: "result__input", maxlength: Visit::NOTE_LIMIT, placeholder: "Note (optional)", aria: { label: "Note on #{standard.text}" } %>
+          </li>
+        <% end %>
+      </ul>
+    </fieldset>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit "See the Action Plan", name: nil, class: "button button--primary" %>
+  </div>
+<% end %>

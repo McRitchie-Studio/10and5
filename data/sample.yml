@@ -1,0 +1,748 @@
+# Sample data for the 10&5 Hospitality demo. Every restaurant, visit and note
+# here is invented. Each visit lists only what it did not pass: `missed`
+# (a failed standard and the evaluator's note), `na` (not observed on this
+# visit) and `notes` (a note on a standard that passed). Every other
+# standard passed.
+departments:
+- key: host
+  name: Host
+  standards:
+  - id: h1
+    text: Greeted the party within 30 seconds of arrival
+  - id: h2
+    text: Made eye contact and smiled during the greeting
+  - id: h3
+    text: Offered to check coats or bags
+  - id: h4
+    text: Quoted an accurate wait time
+  - id: h5
+    text: Walked the party to the table at their pace
+  - id: h6
+    text: Thanked the party and invited them back on the way out
+- key: bartender
+  name: Bartender
+  standards:
+  - id: b1
+    text: Acknowledged guests at the bar within one minute
+  - id: b2
+    text: Offered a drink list or made a recommendation
+  - id: b3
+    text: Measured every pour
+  - id: b4
+    text: Kept the bar top clean and dry
+  - id: b5
+    text: Offered water alongside alcoholic drinks
+  - id: b6
+    text: Closed out the tab promptly when asked
+- key: server
+  name: Server
+  standards:
+  - id: s1
+    text: Approached the table within two minutes of seating
+  - id: s2
+    text: Introduced themselves by name
+  - id: s3
+    text: Described a special or signature dish
+  - id: s4
+    text: Asked about allergies or dietary needs
+  - id: s5
+    text: Checked back within two bites or two minutes of the entrees
+  - id: s6
+    text: Cleared plates only once everyone had finished
+  - id: s7
+    text: Offered dessert or coffee
+  - id: s8
+    text: Delivered the check within five minutes of the request
+- key: manager
+  name: Manager
+  standards:
+  - id: m1
+    text: Visible in the dining room during service
+  - id: m2
+    text: Stopped by the table to ask about the experience
+  - id: m3
+    text: Staff in clean, complete uniforms
+  - id: m4
+    text: Restrooms clean and stocked
+  - id: m5
+    text: Resolved a problem without being asked twice
+restaurants:
+- slug: copper-fig
+  name: The Copper Fig
+  cuisine: Modern American
+  neighborhood: Riverside
+  visits:
+  - number: 1
+    date: '2026-02-06'
+    evaluator: Evaluator 13
+    party_size: 2
+    arrived: 6:35 PM
+    departed: 7:54 PM
+    check_number: '3938'
+    table: '2'
+    check_amount: 81.85
+    all_items_billed: true
+    observations:
+      host: Two hosts at the stand; the evaluator was greeted by the one in a gray sweater.
+      bartender: Bartender in a denim apron, also making drinks for the dining room.
+      server: Server worked the patio and the back room.
+      manager: Manager in a suit jacket, mostly near the kitchen door.
+    missed:
+      h2: Friendly words, but no eye contact.
+      b5: Water only after the evaluator asked.
+      s2: Introduced only when the evaluator asked.
+      s4: Allergies were not asked about.
+      s8: About seven minutes for the check; server was at another section.
+      m2: No table touch from a manager.
+      m4: Paper towels out in the restroom.
+    na:
+    - m5
+    notes: {}
+  - number: 2
+    date: '2026-03-09'
+    evaluator: Evaluator 10
+    party_size: 4
+    arrived: 7:09 PM
+    departed: 8:56 PM
+    check_number: '3117'
+    table: '18'
+    check_amount: 245.6
+    all_items_billed: true
+    observations:
+      host: Host in a black blazer at the stand; worked alone during the rush.
+      bartender:
+      server: Server in the back section, carrying five tables.
+      manager: Manager seen once at the host stand.
+    missed:
+      h5: Pointed at the table instead of walking the party over.
+      s1: Water was dropped by a busser; server arrived at minute five.
+      s2: Introduced only when the evaluator asked.
+      s4: No question about dietary needs, even with a shared plate.
+      s8: Nine minutes from asking to receiving the check.
+      m2: Manager walked by twice without stopping.
+      m3: Two servers in untucked shirts; one missing an apron.
+    na:
+    - b1
+    - b2
+    - b3
+    - b4
+    - b5
+    - b6
+    - m5
+    notes:
+      h1: Greeted the moment the door closed.
+      s3: Walked through the braised short rib with real enthusiasm.
+  - number: 3
+    date: '2026-04-06'
+    evaluator: Evaluator 06
+    party_size: 4
+    arrived: 6:48 PM
+    departed: 8:34 PM
+    check_number: '2743'
+    table: '28'
+    check_amount: 200.63
+    all_items_billed: true
+    observations:
+      host: Host in a black blazer at the stand; worked alone during the rush.
+      bartender: One bartender on a six-seat bar; busy but composed.
+      server: Server in the back section, carrying five tables.
+      manager: Manager in a suit jacket, mostly near the kitchen door.
+    missed:
+      s7: Dessert menu only after the evaluator asked.
+      m1: No manager seen in the dining room during the visit.
+      m2: No table touch from a manager.
+      m3: Two servers in untucked shirts; one missing an apron.
+    na:
+    - m5
+    notes:
+      h1: Greeted the moment the door closed.
+      b2: Recommended a seasonal spritz without being asked.
+  - number: 4
+    date: '2026-05-05'
+    evaluator: Evaluator 14
+    party_size: 4
+    arrived: 7:07 PM
+    departed: 8:24 PM
+    check_number: '5073'
+    table: '31'
+    check_amount: 154.01
+    all_items_billed: true
+    observations:
+      host: Host with a headset, handling phones and walk-ins.
+      bartender: One bartender on a six-seat bar; busy but composed.
+      server: Server worked the patio and the back room.
+      manager: Manager in a dark shirt with a radio, circulating.
+    missed:
+      h5: Host walked well ahead and waited at the table.
+      b2: Asked 'what can I get you?' with no list offered.
+      b5: Two rounds, no water offered.
+      b6: Card sat on the bar until the evaluator asked a second time.
+      s2: Introduced only when the evaluator asked.
+      s6: One plate cleared while a guest was still eating.
+      s8: About seven minutes for the check; server was at another section.
+      m2: No table touch from a manager.
+    na:
+    - h3
+    - h4
+    - m5
+    notes:
+      s3: Walked through the braised short rib with real enthusiasm.
+      s4: Asked about allergies before taking the order.
+  - number: 5
+    date: '2026-06-07'
+    evaluator: Evaluator 05
+    party_size: 2
+    arrived: 6:03 PM
+    departed: 7:26 PM
+    check_number: '1925'
+    table: '31'
+    check_amount: 91.78
+    all_items_billed: true
+    observations:
+      host: Host in a black blazer at the stand; worked alone during the rush.
+      bartender: One bartender on a six-seat bar; busy but composed.
+      server: Server with a notepad, tall, in a long black apron.
+      manager: Manager seen once at the host stand.
+    missed:
+      b2: No list and no suggestion when the evaluator hesitated.
+      b3: Free-poured two cocktails; glasses looked heavy.
+      s2: Introduced only when the evaluator asked.
+      s3: No special mentioned; menus were dropped and left.
+    na:
+    - h3
+    - m5
+    notes:
+      h1: Greeted the moment the door closed.
+      m2: Manager asked how the meal was and remembered the entree.
+  - number: 6
+    date: '2026-07-03'
+    evaluator: Evaluator 12
+    party_size: 4
+    arrived: 6:16 PM
+    departed: 8:09 PM
+    check_number: '9143'
+    table: '19'
+    check_amount: 198.42
+    all_items_billed: false
+    observations:
+      host: Host in a black blazer at the stand; worked alone during the rush.
+      bartender: One bartender on a six-seat bar; busy but composed.
+      server: Server worked the patio and the back room.
+      manager: Manager in a suit jacket, mostly near the kitchen door.
+    missed:
+      b1: About three minutes at the bar before a nod or a hello.
+      m2: Manager walked by twice without stopping.
+    na:
+    - h3
+    - m5
+    notes:
+      s3: Walked through the braised short rib with real enthusiasm.
+      s4: Asked about allergies before taking the order.
+  - number: 7
+    date: '2026-08-04'
+    evaluator: Evaluator 13
+    party_size: 4
+    arrived: 7:00 PM
+    departed: 8:12 PM
+    check_number: '7735'
+    table: '18'
+    check_amount: 246.09
+    all_items_billed: true
+    observations:
+      host: Host in a black blazer at the stand; worked alone during the rush.
+      bartender:
+      server: Server with a notepad, tall, in a long black apron.
+      manager: Manager seen once at the host stand.
+    missed:
+      h2: Friendly words, but no eye contact.
+      s3: Signature dish not mentioned when the evaluator asked for favorites.
+      s4: Allergies were not asked about.
+      s5: Server did not return until clearing.
+    na:
+    - h3
+    - h4
+    - b1
+    - b2
+    - b3
+    - b4
+    - b5
+    - b6
+    - m5
+    notes: {}
+  - number: 8
+    date: '2026-09-04'
+    evaluator: Evaluator 10
+    party_size: 3
+    arrived: 6:49 PM
+    departed: 7:59 PM
+    check_number: '6125'
+    table: '34'
+    check_amount: 179.91
+    all_items_billed: true
+    observations:
+      host: Two hosts at the stand; the evaluator was greeted by the one in a gray sweater.
+      bartender:
+      server: Server worked the patio and the back room.
+      manager: Manager in a suit jacket, mostly near the kitchen door.
+    missed:
+      s6: One plate cleared while a guest was still eating.
+      s8: About seven minutes for the check; server was at another section.
+      m2: Manager walked by twice without stopping.
+      m5: Cold entree was mentioned twice before it was replaced.
+    na:
+    - h3
+    - h4
+    - b1
+    - b2
+    - b3
+    - b4
+    - b5
+    - b6
+    notes:
+      h1: Greeted the moment the door closed.
+- slug: harbor-and-hearth
+  name: Harbor & Hearth
+  cuisine: Seafood
+  neighborhood: Old Port
+  visits:
+  - number: 1
+    date: '2026-02-13'
+    evaluator: Evaluator 17
+    party_size: 3
+    arrived: 7:00 PM
+    departed: 8:44 PM
+    check_number: '8153'
+    table: '31'
+    check_amount: 129.3
+    all_items_billed: true
+    observations:
+      host: Host in a black blazer at the stand; worked alone during the rush.
+      bartender: Two bartenders; the evaluator was served by the one on the left well.
+      server: Server in the back section, carrying five tables.
+      manager: Manager seen once at the host stand.
+    missed:
+      s2: Introduced only when the evaluator asked.
+      s4: No question about dietary needs, even with a shared plate.
+      m3: Bartender's shirt stained.
+    na:
+    - h4
+    - m5
+    notes:
+      b2: Recommended a seasonal spritz without being asked.
+  - number: 2
+    date: '2026-03-13'
+    evaluator: Evaluator 15
+    party_size: 4
+    arrived: 6:02 PM
+    departed: 7:44 PM
+    check_number: '5175'
+    table: '27'
+    check_amount: 245.94
+    all_items_billed: true
+    observations:
+      host: Host with a headset, handling phones and walk-ins.
+      bartender:
+      server: Server with a notepad, tall, in a long black apron.
+      manager: Manager seen once at the host stand.
+    missed:
+      s2: Introduced only when the evaluator asked.
+      s4: Allergies were not asked about.
+      s6: Plates pulled as soon as the first guest finished.
+      s7: Dessert menu only after the evaluator asked.
+      m1: No manager seen in the dining room during the visit.
+      m2: No table touch from a manager.
+    na:
+    - h4
+    - b1
+    - b2
+    - b3
+    - b4
+    - b5
+    - b6
+    notes:
+      s3: Walked through the braised short rib with real enthusiasm.
+  - number: 3
+    date: '2026-04-09'
+    evaluator: Evaluator 03
+    party_size: 2
+    arrived: 6:19 PM
+    departed: 7:37 PM
+    check_number: '1742'
+    table: '35'
+    check_amount: 82.94
+    all_items_billed: true
+    observations:
+      host: Host with a headset, handling phones and walk-ins.
+      bartender: Bartender in a denim apron, also making drinks for the dining room.
+      server: Server worked the patio and the back room.
+      manager: Manager seen once at the host stand.
+    missed:
+      b6: Waited about eight minutes to close out.
+      s2: Introduced only when the evaluator asked.
+      m3: Bartender's shirt stained.
+    na: []
+    notes:
+      h1: Greeted the moment the door closed.
+      m5: Replaced an overcooked steak within minutes, no fuss.
+  - number: 4
+    date: '2026-05-07'
+    evaluator: Evaluator 17
+    party_size: 3
+    arrived: 6:24 PM
+    departed: 8:14 PM
+    check_number: '8346'
+    table: '12'
+    check_amount: 125.12
+    all_items_billed: true
+    observations:
+      host: Two hosts at the stand; the evaluator was greeted by the one in a gray sweater.
+      bartender: One bartender on a six-seat bar; busy but composed.
+      server: Server in the back section, carrying five tables.
+      manager: Manager seen once at the host stand.
+    missed:
+      b3: Free-poured two cocktails; glasses looked heavy.
+      s1: Water was dropped by a busser; server arrived at minute five.
+      s4: Allergies were not asked about.
+      s6: Plates pulled as soon as the first guest finished.
+      s8: Nine minutes from asking to receiving the check.
+      m3: Bartender's shirt stained.
+    na:
+    - h3
+    - h4
+    notes:
+      h1: Greeted the moment the door closed.
+      b2: Recommended a seasonal spritz without being asked.
+  - number: 5
+    date: '2026-06-09'
+    evaluator: Evaluator 18
+    party_size: 4
+    arrived: 6:08 PM
+    departed: 7:38 PM
+    check_number: '9214'
+    table: '31'
+    check_amount: 176.66
+    all_items_billed: true
+    observations:
+      host: Host in a black blazer at the stand; worked alone during the rush.
+      bartender: One bartender on a six-seat bar; busy but composed.
+      server: Server with a notepad, tall, in a long black apron.
+      manager: Manager in a dark shirt with a radio, circulating.
+    missed:
+      h2: Greeting was delivered while looking at the seating chart.
+      h5: Host walked well ahead and waited at the table.
+      b3: Free-poured two cocktails; glasses looked heavy.
+      s4: Allergies were not asked about.
+      s5: Server did not return until clearing.
+      m2: Manager walked by twice without stopping.
+    na:
+    - h3
+    - h4
+    - m5
+    notes:
+      h1: Greeted the moment the door closed.
+  - number: 6
+    date: '2026-07-07'
+    evaluator: Evaluator 08
+    party_size: 2
+    arrived: 6:06 PM
+    departed: 7:57 PM
+    check_number: '9995'
+    table: '9'
+    check_amount: 77.96
+    all_items_billed: true
+    observations:
+      host: Two hosts at the stand; the evaluator was greeted by the one in a gray sweater.
+      bartender: Two bartenders; the evaluator was served by the one on the left well.
+      server: Server with a notepad, tall, in a long black apron.
+      manager: Manager in a suit jacket, mostly near the kitchen door.
+    missed:
+      b3: Free-poured two cocktails; glasses looked heavy.
+      b4: Rings and a used napkin left in front of the evaluator.
+      s1: Water was dropped by a busser; server arrived at minute five.
+      s2: Introduced only when the evaluator asked.
+      s3: Signature dish not mentioned when the evaluator asked for favorites.
+      s4: Allergies were not asked about.
+      m1: Manager stayed at the pass the whole visit.
+      m4: Paper towels out in the restroom.
+    na:
+    - h3
+    - h4
+    - m5
+    notes:
+      m2: Manager asked how the meal was and remembered the entree.
+  - number: 7
+    date: '2026-08-09'
+    evaluator: Evaluator 10
+    party_size: 3
+    arrived: 7:04 PM
+    departed: 8:50 PM
+    check_number: '6500'
+    table: '18'
+    check_amount: 137.67
+    all_items_billed: true
+    observations:
+      host: Two hosts at the stand; the evaluator was greeted by the one in a gray sweater.
+      bartender:
+      server: Server worked the patio and the back room.
+      manager: Manager in a dark shirt with a radio, circulating.
+    missed:
+      s1: Four minutes before the first visit to the table.
+      s3: No special mentioned; menus were dropped and left.
+      s4: Allergies were not asked about.
+      s6: Plates pulled as soon as the first guest finished.
+      s7: Dessert menu only after the evaluator asked.
+      s8: Nine minutes from asking to receiving the check.
+      m1: No manager seen in the dining room during the visit.
+    na:
+    - h3
+    - b1
+    - b2
+    - b3
+    - b4
+    - b5
+    - b6
+    - m5
+    notes:
+      h1: Greeted the moment the door closed.
+      m2: Manager asked how the meal was and remembered the entree.
+  - number: 8
+    date: '2026-09-13'
+    evaluator: Evaluator 11
+    party_size: 2
+    arrived: 7:07 PM
+    departed: 8:54 PM
+    check_number: '9933'
+    table: '8'
+    check_amount: 93.64
+    all_items_billed: true
+    observations:
+      host: Two hosts at the stand; the evaluator was greeted by the one in a gray sweater.
+      bartender: One bartender on a six-seat bar; busy but composed.
+      server: Server worked the patio and the back room.
+      manager: Manager in a suit jacket, mostly near the kitchen door.
+    missed:
+      h1: Host was on the phone; roughly 90 seconds before a greeting.
+      b1: Bartender finished restocking before greeting.
+      b2: Asked 'what can I get you?' with no list offered.
+      b3: Free-poured two cocktails; glasses looked heavy.
+      b6: Waited about eight minutes to close out.
+      s1: Four minutes before the first visit to the table.
+      s4: Allergies were not asked about.
+      m4: Restroom floor wet; soap dispenser empty.
+    na:
+    - h3
+    - m5
+    notes: {}
+- slug: juniper-social
+  name: Juniper Social
+  cuisine: Small plates
+  neighborhood: Uptown
+  visits:
+  - number: 1
+    date: '2026-02-16'
+    evaluator: Evaluator 16
+    party_size: 2
+    arrived: 6:18 PM
+    departed: 7:28 PM
+    check_number: '5020'
+    table: '20'
+    check_amount: 114.7
+    all_items_billed: false
+    observations:
+      host: Host with a headset, handling phones and walk-ins.
+      bartender: One bartender on a six-seat bar; busy but composed.
+      server: Server in the back section, carrying five tables.
+      manager: Manager in a suit jacket, mostly near the kitchen door.
+    missed:
+      h6: No goodbye at the door; host stand was empty.
+      s5: No check-back until entrees were nearly finished.
+    na:
+    - m5
+    notes:
+      h1: Greeted the moment the door closed.
+      s4: Asked about allergies before taking the order.
+      m2: Manager asked how the meal was and remembered the entree.
+  - number: 2
+    date: '2026-03-13'
+    evaluator: Evaluator 09
+    party_size: 4
+    arrived: 7:04 PM
+    departed: 8:36 PM
+    check_number: '5484'
+    table: '3'
+    check_amount: 190.49
+    all_items_billed: false
+    observations:
+      host: Host in a black blazer at the stand; worked alone during the rush.
+      bartender: Two bartenders; the evaluator was served by the one on the left well.
+      server: Server in the back section, carrying five tables.
+      manager: Manager seen once at the host stand.
+    missed:
+      s5: Server did not return until clearing.
+      s7: Dessert menu only after the evaluator asked.
+      m5: Cold entree was mentioned twice before it was replaced.
+    na:
+    - h4
+    notes:
+      h1: Greeted the moment the door closed.
+      s3: Walked through the braised short rib with real enthusiasm.
+  - number: 3
+    date: '2026-04-17'
+    evaluator: Evaluator 07
+    party_size: 4
+    arrived: 6:52 PM
+    departed: 8:43 PM
+    check_number: '3492'
+    table: '5'
+    check_amount: 241.1
+    all_items_billed: false
+    observations:
+      host: Host in a black blazer at the stand; worked alone during the rush.
+      bartender: One bartender on a six-seat bar; busy but composed.
+      server: Server with a notepad, tall, in a long black apron.
+      manager: Manager seen once at the host stand.
+    missed:
+      b2: No list and no suggestion when the evaluator hesitated.
+      b6: Card sat on the bar until the evaluator asked a second time.
+    na:
+    - h4
+    notes: {}
+  - number: 4
+    date: '2026-05-17'
+    evaluator: Evaluator 08
+    party_size: 4
+    arrived: 7:05 PM
+    departed: 8:25 PM
+    check_number: '2656'
+    table: '27'
+    check_amount: 229.62
+    all_items_billed: true
+    observations:
+      host: Two hosts at the stand; the evaluator was greeted by the one in a gray sweater.
+      bartender: One bartender on a six-seat bar; busy but composed.
+      server: Server in the back section, carrying five tables.
+      manager: Manager in a dark shirt with a radio, circulating.
+    missed:
+      h5: Pointed at the table instead of walking the party over.
+      s5: Server did not return until clearing.
+      s6: Plates pulled as soon as the first guest finished.
+      m3: Two servers in untucked shirts; one missing an apron.
+      m4: Restroom floor wet; soap dispenser empty.
+    na:
+    - h3
+    - m5
+    notes: {}
+  - number: 5
+    date: '2026-06-16'
+    evaluator: Evaluator 15
+    party_size: 3
+    arrived: 6:55 PM
+    departed: 8:48 PM
+    check_number: '4532'
+    table: '5'
+    check_amount: 171.53
+    all_items_billed: true
+    observations:
+      host: Host in a black blazer at the stand; worked alone during the rush.
+      bartender: Bartender in a denim apron, also making drinks for the dining room.
+      server: Server worked the patio and the back room.
+      manager: Manager in a suit jacket, mostly near the kitchen door.
+    missed:
+      h5: Host walked well ahead and waited at the table.
+      b2: Asked 'what can I get you?' with no list offered.
+      b3: Jigger sat unused on the rail during the visit.
+      b4: Spill by the well was not wiped for several minutes.
+      b6: Waited about eight minutes to close out.
+      s5: No check-back until entrees were nearly finished.
+      m3: Bartender's shirt stained.
+    na:
+    - h3
+    notes:
+      h1: Greeted the moment the door closed.
+      s3: Walked through the braised short rib with real enthusiasm.
+      m2: Manager asked how the meal was and remembered the entree.
+  - number: 6
+    date: '2026-07-13'
+    evaluator: Evaluator 07
+    party_size: 3
+    arrived: 7:06 PM
+    departed: 8:49 PM
+    check_number: '1557'
+    table: '20'
+    check_amount: 140.17
+    all_items_billed: true
+    observations:
+      host: Two hosts at the stand; the evaluator was greeted by the one in a gray sweater.
+      bartender: Two bartenders; the evaluator was served by the one on the left well.
+      server: Server in the back section, carrying five tables.
+      manager: Manager seen once at the host stand.
+    missed:
+      h2: Greeting was delivered while looking at the seating chart.
+      b1: Bartender finished restocking before greeting.
+      b3: Free-poured two cocktails; glasses looked heavy.
+      s3: Signature dish not mentioned when the evaluator asked for favorites.
+      s8: Nine minutes from asking to receiving the check.
+      m2: Manager walked by twice without stopping.
+    na:
+    - h3
+    - h4
+    - m5
+    notes: {}
+  - number: 7
+    date: '2026-08-16'
+    evaluator: Evaluator 13
+    party_size: 3
+    arrived: 6:19 PM
+    departed: 8:14 PM
+    check_number: '9350'
+    table: '32'
+    check_amount: 134.28
+    all_items_billed: true
+    observations:
+      host: Two hosts at the stand; the evaluator was greeted by the one in a gray sweater.
+      bartender: Bartender in a denim apron, also making drinks for the dining room.
+      server: Server worked the patio and the back room.
+      manager: Manager in a suit jacket, mostly near the kitchen door.
+    missed:
+      b1: Bartender finished restocking before greeting.
+      b5: Two rounds, no water offered.
+      s5: Server did not return until clearing.
+      s8: Nine minutes from asking to receiving the check.
+      m1: No manager seen in the dining room during the visit.
+      m2: Manager walked by twice without stopping.
+      m3: Two servers in untucked shirts; one missing an apron.
+    na:
+    - h3
+    - h4
+    - m5
+    notes:
+      b2: Recommended a seasonal spritz without being asked.
+      s4: Asked about allergies before taking the order.
+  - number: 8
+    date: '2026-09-13'
+    evaluator: Evaluator 05
+    party_size: 2
+    arrived: 6:18 PM
+    departed: 7:32 PM
+    check_number: '7073'
+    table: '37'
+    check_amount: 78.93
+    all_items_billed: true
+    observations:
+      host: Host with a headset, handling phones and walk-ins.
+      bartender: Two bartenders; the evaluator was served by the one on the left well.
+      server: Server worked the patio and the back room.
+      manager: Manager in a suit jacket, mostly near the kitchen door.
+    missed:
+      h1: Host was on the phone; roughly 90 seconds before a greeting.
+      b4: Spill by the well was not wiped for several minutes.
+      b5: Two rounds, no water offered.
+      s2: Introduced only when the evaluator asked.
+      s5: Server did not return until clearing.
+      s6: Plates pulled as soon as the first guest finished.
+      m3: Two servers in untucked shirts; one missing an apron.
+    na:
+    - h3
+    - h4
+    - m5
+    notes: {}

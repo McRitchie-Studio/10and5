@@ -1,0 +1,45 @@
+<% content_for :title, "Restaurants" %>
+
+<section class="intro">
+  <h1>Anonymous visits, scored against the house standards.</h1>
+  <p class="lead">Evaluators dine as ordinary guests and score each department, host, bartender, server and manager, on every standard: pass, fail or N/A, with notes. The restaurant gets an Action Plan of what was missed, set against its last visit and its last six.</p>
+</section>
+
+<div class="cards">
+  <% @restaurants.each do |restaurant| %>
+    <% visit = restaurant.latest_visit %>
+    <% score = visit.score %>
+    <article class="card restaurant-card" data-restaurant="<%= restaurant.slug %>">
+      <header class="restaurant-card__head">
+        <div>
+          <h2 class="card__title"><%= link_to restaurant.name, restaurant_path(restaurant) %></h2>
+          <p class="meta"><%= restaurant.cuisine %> · <%= restaurant.neighborhood %></p>
+        </div>
+        <div class="score score--<%= band(score) %>">
+          <span class="score__value"><%= percent(score) %></span>
+          <span class="score__label">Visit <%= visit.number %></span>
+        </div>
+      </header>
+
+      <ol class="trend" aria-label="Score on each visit, oldest first">
+        <% restaurant.visits.each do |v| %>
+          <li class="trend__bar trend__bar--<%= band(v.score) %>" style="--h: <%= v.score.percent || 0 %>%" title="Visit <%= v.number %>: <%= percent(v.score) %>"><span class="visually-hidden">Visit <%= v.number %>: <%= percent(v.score) %></span></li>
+        <% end %>
+      </ol>
+
+      <ul class="dept-chips">
+        <% Sample.departments.each do |department| %>
+          <li class="dept-chip dept-chip--<%= band(visit.score(department)) %>"><span><%= department.name %></span> <strong><%= percent(visit.score(department)) %></strong></li>
+        <% end %>
+      </ul>
+
+      <p class="meta">Last visit <%= visit_date(visit) %> · <%= pluralize(visit.missed.size, "missed standard") %></p>
+
+      <div class="actions">
+        <%= link_to "Action Plan", action_plan_restaurant_visit_path(restaurant, visit), class: "button button--primary" %>
+        <%= link_to "Scorecard", restaurant_visit_path(restaurant, visit), class: "button" %>
+        <%= link_to "All visits", restaurant_path(restaurant), class: "button button--quiet" %>
+      </div>
+    </article>
+  <% end %>
+</div>

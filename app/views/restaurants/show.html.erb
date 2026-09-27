@@ -1,0 +1,31 @@
+<% content_for :title, @restaurant.name %>
+
+<nav class="crumbs" aria-label="Breadcrumb"><%= link_to "Restaurants", root_path %></nav>
+
+<header class="page-head">
+  <div>
+    <h1><%= @restaurant.name %></h1>
+    <p class="meta"><%= @restaurant.cuisine %> · <%= @restaurant.neighborhood %> · <%= pluralize(@restaurant.visits.size, "visit") %></p>
+  </div>
+  <%= link_to "Score a visit", restaurant_new_evaluation_path(@restaurant), class: "button button--primary" %>
+</header>
+
+<section class="panel">
+  <h2 class="panel__title">Visits</h2>
+  <ol class="visit-list" reversed>
+    <% @restaurant.visits.reverse_each do |visit| %>
+      <li class="visit-row" data-visit="<%= visit.number %>">
+        <div class="visit-row__when">
+          <strong><%= visit_title(visit) %></strong>
+          <span class="meta"><%= visit_date(visit) %> · <%= visit.evaluator %></span>
+        </div>
+        <span class="score-chip score-chip--<%= band(visit.score) %>"><%= percent(visit.score) %></span>
+        <span class="visit-row__missed meta"><%= pluralize(visit.missed.size, "miss") %></span>
+        <span class="visit-row__links">
+          <%= link_to "Action Plan", action_plan_restaurant_visit_path(@restaurant, visit) %>
+          <%= link_to "Scorecard", restaurant_visit_path(@restaurant, visit) %>
+        </span>
+      </li>
+    <% end %>
+  </ol>
+</section>
