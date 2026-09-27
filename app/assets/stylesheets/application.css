@@ -132,6 +132,9 @@ main { padding-top: 28px; padding-bottom: 48px; }
 }
 .panel { margin: 0 0 18px; }
 fieldset.panel { margin-inline: 0; }
+/* A legend otherwise sits on the fieldset's top border. */
+fieldset.panel > legend { float: left; width: 100%; }
+fieldset.panel > legend + * { clear: both; }
 .panel__title { font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; padding: 0; }
 .card__title { font: 700 1.3rem/1.2 var(--serif); }
 .card__title a { text-decoration: none; }
@@ -184,8 +187,10 @@ fieldset.panel { margin-inline: 0; }
 }
 
 /* Visit details */
-.details { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 140px), 1fr)); gap: 1px; margin: 0 0 18px; background: var(--rule); border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden; }
-.details > div { background: var(--surface); padding: 10px 14px; }
+/* Cells draw their own right and bottom rules, so a short last row leaves no
+   gray gap; the container clips the outer edge. */
+.details { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 140px), 1fr)); margin: 0 0 18px; background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); overflow: hidden; }
+.details > div { padding: 10px 14px; box-shadow: 1px 0 0 var(--rule), 0 1px 0 var(--rule); margin: 0 -1px -1px 0; }
 .details dt { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
 .details dd { margin: 2px 0 0; font-weight: 600; }
 

@@ -17,6 +17,8 @@
   <%= link_to "Start over", restaurant_new_evaluation_path(@restaurant), class: "button button--quiet" %>
 </div>
 
-<%= render "shared/visit_details", visit: @visit %>
+<% if [ @visit.arrived, @visit.departed, @visit.party_size, @visit.table, @visit.check_number, @visit.check_amount ].any? || !@visit.all_items_billed.nil? %>
+  <%= render "shared/visit_details", visit: @visit %>
+<% end %>
 
 <%= render "shared/action_plan", plan: @plan %>
