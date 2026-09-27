@@ -1,4 +1,5 @@
 <% last = plan.last_visit %>
+<% history = plan.last_six.empty? ? "Earlier visits" : "Last #{plan.last_six.size}" %>
 <section class="overview" aria-label="Overall score">
   <div class="overview__cell">
     <span class="overview__label"><%= plan.visit.draft? ? "This scorecard" : "This visit" %></span>
@@ -9,7 +10,7 @@
     <span class="overview__value"><%= last ? percent(last.score) : "–" %></span>
   </div>
   <div class="overview__cell">
-    <span class="overview__label">Last <%= plan.last_six.size %></span>
+    <span class="overview__label"><%= history %></span>
     <span class="overview__value"><%= percent(plan.overall_last_six) %></span>
   </div>
   <div class="overview__cell">
@@ -50,7 +51,7 @@
           </div>
           <dl class="plan-item__history">
             <div><dt>Last visit</dt><dd><%= mark_pill(item.last_visit) %></dd></div>
-            <div><dt>Last <%= plan.last_six.size %></dt><dd><%= passed_of(item.last_six) %></dd></div>
+            <div><dt><%= history %></dt><dd><%= passed_of(item.last_six) %></dd></div>
           </dl>
         </li>
       <% end %>

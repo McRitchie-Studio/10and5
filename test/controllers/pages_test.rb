@@ -66,6 +66,8 @@ class PagesTest < ActionDispatch::IntegrationTest
     assert_demo_page
     assert_select "p.meta", text: /this was the first visit/
     assert_select ".plan-item__history dd", text: "No visit"
+    assert_select ".plan-item__history dt", text: "Earlier visits"
+    assert_not_includes response.body, "Last 0"
   end
 
   test "the standards page lists all of them by department" do
