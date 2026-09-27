@@ -88,7 +88,7 @@ p { margin: 0; }
 .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; min-width: 0; }
 .brand__mark {
   display: inline-grid; place-items: center; flex: none; width: 44px; height: 44px; border-radius: 12px;
-  background: #f5f1ea; color: #7a2437; font: 800 0.95rem/1 var(--serif); letter-spacing: -0.02em;
+  background: #f5f1ea; color: #7a2437; font: 800 0.82rem/1 var(--serif); letter-spacing: -0.03em;
 }
 .brand__text { display: flex; flex-direction: column; min-width: 0; }
 .brand__name { font: 700 1.15rem/1.2 var(--serif); }

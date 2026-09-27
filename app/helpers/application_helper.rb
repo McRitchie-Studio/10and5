@@ -29,7 +29,7 @@ module ApplicationHelper
 
   def change_tag(change)
     label = change_label(change)
-    return tag.span("First comparison", class: "change change--none") unless label
+    return tag.span("Nothing to compare", class: "change change--none") unless label
 
     direction = change.positive? ? "up" : (change.negative? ? "down" : "flat")
     tag.span(label, class: "change change--#{direction}")
@@ -40,8 +40,8 @@ module ApplicationHelper
     return "none" unless score&.any?
 
     case score.percent
-    when 90.. then "high"
-    when 75...90 then "mid"
+    when 85.. then "high"
+    when 70...85 then "mid"
     else "low"
     end
   end
