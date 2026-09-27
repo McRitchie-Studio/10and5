@@ -21,7 +21,7 @@ class ProductionSslTest < ActiveSupport::TestCase
   test "plain http redirects to https" do
     response = self.class.results["http /"]
     assert_equal 301, response["status"]
-    assert_equal "https://weekly-lock.mcritchie.studio/", response["location"]
+    assert_equal "https://10and5.mcritchie.studio/", response["location"]
   end
 
   test "/up still answers 200 over plain http for health checks" do
@@ -29,9 +29,15 @@ class ProductionSslTest < ActiveSupport::TestCase
     assert_equal 200, self.class.results["https /up"]["status"]
   end
 
-  test "https serves the season without a session cookie" do
+  test "https serves the restaurants without a session cookie" do
     response = self.class.results["https /"]
     assert_equal 200, response["status"]
     assert_nil response["set_cookie"], "the public page should set no cookie"
+  end
+
+  test "the demo scorecard answers in production without a session" do
+    response = self.class.results["https /restaurants/copper-fig/evaluate/action-plan?marks%5Bs4%5D=fail"]
+    assert_equal 200, response["status"]
+    assert_nil response["set_cookie"]
   end
 end
