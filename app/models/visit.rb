@@ -17,10 +17,12 @@ class Visit
       all_items_billed: raw["all_items_billed"], observations: raw.fetch("observations", {}))
   end
 
-  # A scorecard an evaluator filled in on the demo form. It is scored and
-  # compared like any visit, and never saved.
+  # A scorecard an evaluator filled in on the demo form (its permitted
+  # params, as a hash). It is scored and compared like any visit, and never
+  # saved. A standard left unmarked counts as a pass, as the form defaults.
   def self.draft(restaurant, params)
-    marks = params.fetch(:marks, {}).to_h.to_h do |id, mark|
+    params = params.to_h.with_indifferent_access
+    marks = params.fetch(:marks, {}).to_h do |id, mark|
       [ id.to_s, Result::MARKS.map(&:to_s).include?(mark.to_s) ? mark.to_sym : :pass ]
     end
     notes = params.fetch(:notes, {}).to_h.transform_keys(&:to_s)

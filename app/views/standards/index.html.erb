@@ -1,0 +1,21 @@
+<% content_for :title, "Standards" %>
+
+<header class="page-head">
+  <div>
+    <h1>The standards</h1>
+    <p class="lead">What every evaluator scores on every visit, by department. <%= Sample.standards.size %> standards in all.</p>
+  </div>
+</header>
+
+<div class="dept-grid">
+  <% @departments.each do |department| %>
+    <section class="panel" data-department="<%= department.key %>">
+      <h2 class="panel__title"><%= department.name %></h2>
+      <ol class="standard-list">
+        <% department.standards.each do |standard| %>
+          <li><%= standard.text %></li>
+        <% end %>
+      </ol>
+    </section>
+  <% end %>
+</div>
