@@ -14,8 +14,8 @@ module TenAndFive
 
     config.autoload_lib(ignore: %w[assets tasks])
 
-
-    # Public pages with no forms and no sign-in: no session, so no cookie.
+    # No sign-in, and the one form (the demo scorecard) is a GET that saves
+    # nothing: no session, so no cookie.
     config.session_store :disabled
   end
 end
