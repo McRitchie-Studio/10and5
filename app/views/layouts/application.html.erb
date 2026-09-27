@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= content_for?(:title) ? "#{yield(:title)} | 10&5 Hospitality" : "10&5 Hospitality" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Restaurant mystery-shopper scorecards, and an Action Plan of every missed standard by department.">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#f5f1ea" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#121012" media="(prefers-color-scheme: dark)">
+    <meta name="application-name" content="10&amp;5 Hospitality">
+    <meta property="og:title" content="<%= content_for?(:title) ? yield(:title) : "10&5 Hospitality" %>">
+    <meta property="og:type" content="website">
+    <%= csp_meta_tag %>
+
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%= stylesheet_link_tag :app %>
+  </head>
+
+  <body>
+    <header class="masthead">
+      <div class="wrap masthead__inner">
+        <a class="brand" href="<%= root_path %>">
+          <%= brand_mark %>
+          <span class="brand__text">
+            <span class="brand__name">10&amp;5 Hospitality</span>
+            <span class="brand__tag">Mystery-shopper scorecards</span>
+          </span>
+        </a>
+        <nav class="nav" aria-label="Main">
+          <%= link_to "Restaurants", root_path, class: "nav__link", aria: { current: (current_page?(root_path) ? "page" : nil) } %>
+          <%= link_to "Standards", standards_path, class: "nav__link", aria: { current: (current_page?(standards_path) ? "page" : nil) } %>
+        </nav>
+      </div>
+    </header>
+
+    <p class="demo-notice" data-demo-notice>
+      <span class="wrap"><strong>Demo data.</strong> These restaurants, visits and notes are invented to show how the platform works. Nothing you enter is saved.</span>
+    </p>
+
+    <main class="wrap">
+      <%= yield %>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap footer__inner">
+        <p>Each standard is scored Pass, Fail or N/A. A score is the share of scored standards that passed; N/A counts for neither side.</p>
+        <p>A rebuild of <a href="https://github.com/amcritchie/garret-app">the 10&amp;5 Hospitality evaluation app</a> (2015-17). Built with <a href="https://mcritchie.studio/build">McRitchie Studio</a>.</p>
+      </div>
+    </footer>
+  </body>
+</html>

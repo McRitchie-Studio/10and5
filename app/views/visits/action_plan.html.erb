@@ -1,0 +1,23 @@
+<% content_for :title, "Action Plan · #{@restaurant.name}, #{visit_title(@visit).downcase}" %>
+
+<nav class="crumbs" aria-label="Breadcrumb"><%= link_to "Restaurants", root_path %> / <%= link_to @restaurant.name, restaurant_path(@restaurant) %></nav>
+
+<header class="page-head">
+  <div>
+    <p class="eyebrow">Action Plan</p>
+    <h1><%= @restaurant.name %></h1>
+    <p class="meta"><%= visit_title(@visit) %> · <%= visit_date(@visit) %> · compared with <%= @plan.last_visit ? "visit #{@plan.last_visit.number} and the #{pluralize(@plan.last_six.size, 'visit')} before this one" : "nothing yet: this was the first visit" %></p>
+  </div>
+</header>
+
+<div class="actions actions--top">
+  <%= link_to "Evaluator's scorecard", restaurant_visit_path(@restaurant, @visit), class: "button" %>
+  <% if (newer = @restaurant.visit(@visit.number + 1)) %>
+    <%= link_to "Next visit", action_plan_restaurant_visit_path(@restaurant, newer), class: "button button--quiet" %>
+  <% end %>
+  <% if @plan.last_visit %>
+    <%= link_to "Previous visit", action_plan_restaurant_visit_path(@restaurant, @plan.last_visit), class: "button button--quiet" %>
+  <% end %>
+</div>
+
+<%= render "shared/action_plan", plan: @plan %>

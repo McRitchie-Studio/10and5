@@ -1,0 +1,39 @@
+<% content_for :title, "#{visit_title(@visit)} scorecard · #{@restaurant.name}" %>
+
+<nav class="crumbs" aria-label="Breadcrumb"><%= link_to "Restaurants", root_path %> / <%= link_to @restaurant.name, restaurant_path(@restaurant) %></nav>
+
+<header class="page-head">
+  <div>
+    <p class="eyebrow">Evaluator scorecard</p>
+    <h1><%= @restaurant.name %>, <%= visit_title(@visit).downcase %></h1>
+  </div>
+  <div class="score score--<%= band(@visit.score) %>">
+    <span class="score__value"><%= percent(@visit.score) %></span>
+    <span class="score__label"><%= @visit.score.passed %> of <%= @visit.score.scored %> passed</span>
+  </div>
+</header>
+
+<div class="actions actions--top">
+  <%= link_to "Action Plan for this visit", action_plan_restaurant_visit_path(@restaurant, @visit), class: "button button--primary" %>
+</div>
+
+<%= render "shared/visit_details", visit: @visit %>
+
+<% Sample.departments.each do |department| %>
+  <section class="panel dept" data-department="<%= department.key %>">
+    <header class="dept__head">
+      <h2 class="panel__title"><%= department.name %></h2>
+      <span class="score-chip score-chip--<%= band(@visit.score(department)) %>"><%= percent(@visit.score(department)) %></span>
+    </header>
+    <p class="observation"><%= @visit.observation(department) || "Not observed on this visit." %></p>
+    <ul class="result-list">
+      <% @visit.results(department).each do |result| %>
+        <li class="result result--<%= result.mark %>" data-standard="<%= result.standard.id %>">
+          <span class="result__text"><%= result.standard.text %></span>
+          <%= mark_pill(result) %>
+          <% if result.note %><p class="result__note"><%= result.note %></p><% end %>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>

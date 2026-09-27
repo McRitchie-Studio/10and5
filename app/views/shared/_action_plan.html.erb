@@ -1,0 +1,60 @@
+<% last = plan.last_visit %>
+<% history = plan.last_six.empty? ? "Earlier visits" : "Last #{plan.last_six.size}" %>
+<section class="overview" aria-label="Overall score">
+  <div class="overview__cell">
+    <span class="overview__label"><%= plan.visit.draft? ? "This scorecard" : "This visit" %></span>
+    <span class="overview__value score--<%= band(plan.overall) %>"><%= percent(plan.overall) %></span>
+  </div>
+  <div class="overview__cell">
+    <span class="overview__label">Last visit</span>
+    <span class="overview__value"><%= last ? percent(last.score) : "–" %></span>
+  </div>
+  <div class="overview__cell">
+    <span class="overview__label"><%= history %></span>
+    <span class="overview__value"><%= percent(plan.overall_last_six) %></span>
+  </div>
+  <div class="overview__cell">
+    <span class="overview__label">Missed</span>
+    <span class="overview__value" data-missed-count><%= plan.visit.missed.size %></span>
+  </div>
+</section>
+
+<section class="summary-grid" aria-label="Departments">
+  <% plan.summaries.each do |summary| %>
+    <div class="summary summary--<%= band(summary.score) %>" data-summary="<%= summary.department.key %>">
+      <h3 class="summary__name"><%= summary.department.name %></h3>
+      <p class="summary__score"><%= percent(summary.score) %></p>
+      <p class="summary__line"><%= summary.score.any? ? change_tag(summary.change) : tag.span("Not observed", class: "change change--none") %></p>
+      <p class="summary__line meta">Last six: <%= percent(summary.last_six) %></p>
+    </div>
+  <% end %>
+</section>
+
+<% if plan.empty? %>
+  <p class="empty">Every scored standard passed. Nothing to fix from this visit.</p>
+<% end %>
+
+<% plan.summaries.each do |summary| %>
+  <% items = plan.items(summary.department) %>
+  <% next if items.empty? %>
+  <section class="panel plan-dept" data-plan-department="<%= summary.department.key %>">
+    <h2 class="panel__title"><%= summary.department.name %> <span class="meta">· <%= pluralize(items.size, "missed standard") %></span></h2>
+    <ul class="plan-list">
+      <% items.each do |item| %>
+        <li class="plan-item" data-standard="<%= item.standard.id %>">
+          <div class="plan-item__main">
+            <p class="plan-item__standard">
+              <%= item.standard.text %>
+              <% if item.repeat? %><span class="tag tag--repeat">Missed last visit too</span><% end %>
+            </p>
+            <p class="plan-item__note"><%= item.result.note || "No note from the evaluator." %></p>
+          </div>
+          <dl class="plan-item__history">
+            <div><dt>Last visit</dt><dd><%= mark_pill(item.last_visit) %></dd></div>
+            <div><dt><%= history %></dt><dd><%= passed_of(item.last_six) %></dd></div>
+          </dl>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>

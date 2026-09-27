@@ -1,0 +1,24 @@
+<% content_for :title, "Draft Action Plan · #{@restaurant.name}" %>
+
+<nav class="crumbs" aria-label="Breadcrumb"><%= link_to "Restaurants", root_path %> / <%= link_to @restaurant.name, restaurant_path(@restaurant) %></nav>
+
+<header class="page-head">
+  <div>
+    <p class="eyebrow">Action Plan · draft</p>
+    <h1><%= @restaurant.name %></h1>
+    <p class="meta">From the scorecard you just filled in, compared with visit <%= @plan.last_visit.number %> and the last <%= pluralize(@plan.last_six.size, "visit") %>.</p>
+  </div>
+</header>
+
+<p class="draft-notice" data-draft-notice>This plan was built from your draft scorecard. Nothing was saved.</p>
+
+<div class="actions actions--top">
+  <%= link_to "Edit this scorecard", restaurant_new_evaluation_path(@restaurant, request.query_parameters), class: "button" %>
+  <%= link_to "Start over", restaurant_new_evaluation_path(@restaurant), class: "button button--quiet" %>
+</div>
+
+<% if [ @visit.arrived, @visit.departed, @visit.party_size, @visit.table, @visit.check_number, @visit.check_amount ].any? || !@visit.all_items_billed.nil? %>
+  <%= render "shared/visit_details", visit: @visit %>
+<% end %>
+
+<%= render "shared/action_plan", plan: @plan %>
